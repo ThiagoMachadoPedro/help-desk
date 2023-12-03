@@ -69,7 +69,7 @@ public class TecnicoServices {
     objDTO.setId(id);
     Tecnico obj = findById(id);
 // verifica se foi alterado a senha
-    if(!objDTO.getSenha().equals(objDTO.getSenha())){
+    if(!objDTO.getSenha().equals(obj.getSenha())){
          objDTO.setSenha(enconder.encode(objDTO.getSenha()));
     }
 
