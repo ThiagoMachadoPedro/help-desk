@@ -68,6 +68,11 @@ public class TecnicoServices {
   public Tecnico update(Long id, @Valid TecnicoDTO objDTO) {
     objDTO.setId(id);
     Tecnico obj = findById(id);
+// verifica se foi alterado a senha
+    if(!objDTO.getSenha().equals(objDTO.getSenha())){
+         objDTO.setSenha(enconder.encode(objDTO.getSenha()));
+    }
+
     validaPorCpfEmail(objDTO);
     obj = new Tecnico(objDTO);
     return tecnicorepository.save(obj);
