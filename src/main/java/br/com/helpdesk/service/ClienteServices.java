@@ -69,6 +69,11 @@ if(obj.isPresent() && obj.get().getId() != objDTO.getId()){
   public Cliente update(Long id, @Valid ClienteDTO objDTO) {
     objDTO.setId(id);
     Cliente obj = findById(id);
+
+    if(!objDTO.getSenha().equals(obj.getSenha())){
+      objDTO.setSenha(enconder.encode(objDTO.getSenha()));
+ }
+
     validaPorCpfEmail(objDTO);
     obj = new Cliente(objDTO);
     return repository.save(obj);
