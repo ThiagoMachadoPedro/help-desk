@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.helpdesk.model.Cliente;
@@ -31,7 +29,6 @@ public class ClienteController {
 
   @Autowired
   private ClienteServices services;
-
 
   @Autowired
   private EmailServices emailServices;
@@ -54,10 +51,8 @@ public class ClienteController {
   @PostMapping
   public ResponseEntity<ClienteDTO> createCliente(@RequestBody @Valid ClienteDTO ObjDTO) {
 
-
     emailServices.enviarEmailTexto(ObjDTO.getEmail(), "Cadastro realizado com Sucesso!!!",
-    ObjDTO.getNome() + " Seu login é: " + ObjDTO.getEmail() + " sua senha é: " + ObjDTO.getSenha());
-
+        ObjDTO.getNome() + " Seu login é: " + ObjDTO.getEmail() + " sua senha é: " + ObjDTO.getSenha());
 
     Cliente newObj = services.salvar(ObjDTO);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
@@ -70,7 +65,7 @@ public class ClienteController {
 
     Cliente obj = services.update(id, objDTO);
 
-    return ResponseEntity.ok(new ClienteDTO(obj)); 
+    return ResponseEntity.ok(new ClienteDTO(obj));
   }
 
   @DeleteMapping(value = "/{id}")
