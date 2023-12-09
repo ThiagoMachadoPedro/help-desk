@@ -34,8 +34,17 @@ public abstract class Pessoa implements Serializable {
 	@Column(unique = true)
 	protected String email;
 	protected String senha;
+	protected String nomeImagem;
 
-  /* asegura que a lista de porfils irá vim junto com usuario */
+  public String getNomeImagem() {
+		return nomeImagem;
+	}
+
+	public void setNomeImagem(String nomeImagem) {
+		this.nomeImagem = nomeImagem;
+	}
+
+	/* asegura que a lista de porfils irá vim junto com usuario */
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	protected Set<Integer> perfis = new HashSet<>();
@@ -48,12 +57,13 @@ public abstract class Pessoa implements Serializable {
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Pessoa(Long id, String nome, String cpf, String email, String senha) {
+	public Pessoa(Long id, String nome, String cpf, String email, String senha,String nomeImagem) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
+		this.nomeImagem =nomeImagem;
 		this.senha = senha;
 		addPerfil(Perfil.CLIENTE);
 	}

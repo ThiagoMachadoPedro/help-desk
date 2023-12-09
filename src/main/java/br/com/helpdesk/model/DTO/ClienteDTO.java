@@ -30,6 +30,9 @@ public class ClienteDTO implements Serializable {
   protected String senha;
   protected Set<Integer> perfis = new HashSet<>();
 
+
+
+
   @JsonFormat(pattern = "dd/MM/yyyy")
   protected LocalDate dataCriacao = LocalDate.now();
 
@@ -37,6 +40,7 @@ public class ClienteDTO implements Serializable {
     super();
     addPerfis(Perfil.CLIENTE);
   }
+
 
   public ClienteDTO(Cliente obj) {
     super();
@@ -50,6 +54,7 @@ public class ClienteDTO implements Serializable {
     this.dataCriacao = obj.getDataCriacao();
     addPerfis(Perfil.CLIENTE);
   }
+
 
   public Long getId() {
     return id;

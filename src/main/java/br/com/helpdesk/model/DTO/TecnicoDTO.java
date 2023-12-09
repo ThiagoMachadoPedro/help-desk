@@ -28,6 +28,17 @@ public class TecnicoDTO implements Serializable {
   protected String email;
   @NotNull(message = "O campo SENHA é Obrigatorio")
   protected String senha;
+  protected String nomeImagem;
+
+
+  public String getNomeImagem() {
+    return nomeImagem;
+  }
+
+  public void setNomeImagem(String nomeImagem) {
+    this.nomeImagem = nomeImagem;
+  }
+
   protected Set<Integer> perfis = new HashSet<>();
 
   @JsonFormat(pattern = "dd/MM/yyyy")

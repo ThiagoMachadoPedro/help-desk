@@ -32,7 +32,7 @@ public class Chamado implements Serializable {
 	private StatusTicket status;
 	private String titulo;
 	private String observacoes;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.helpdesk.model.Tecnico;
 import br.com.helpdesk.model.DTO.TecnicoDTO;
+import br.com.helpdesk.service.EmailServices;
 import br.com.helpdesk.service.TecnicoServices;
 
 @RestController
@@ -29,6 +30,9 @@ public class TecnicoController {
 
   @Autowired
   private TecnicoServices tecnicoServices;
+
+  @Autowired
+  private EmailServices emailServices;
 
   @GetMapping(value = "/{id}")
   public ResponseEntity<TecnicoDTO> findById(@PathVariable Long id) {
@@ -45,16 +49,20 @@ public class TecnicoController {
     return ResponseEntity.ok().body(lisDTO);
   }
 
-  @PreAuthorize("hasAnyRole('ADMIN')")// so admin pode acessar esse perfil
+  @PreAuthorize("hasAnyRole('ADMIN')") // so admin pode acessar esse perfil
   @PostMapping
   public ResponseEntity<TecnicoDTO> createTecnico(@RequestBody @Valid TecnicoDTO objDTO) {
+
+    emailServices.enviarEmailTexto(objDTO.getEmail(), "Cadastro realizado com Sucesso!!!",
+       objDTO.getNome() +" Seu login é: " + objDTO.getEmail() + " sua senha é: "+ objDTO.getSenha());
 
     Tecnico newObj = tecnicoServices.salvar(objDTO);
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 
     return ResponseEntity.created(uri).build();
   }
-@PreAuthorize("hasAnyRole('ADMIN')")
+
+  @PreAuthorize("hasAnyRole('ADMIN')")
   @PutMapping(value = "/{id}")
   public ResponseEntity<TecnicoDTO> update(@PathVariable Long id, @Valid @RequestBody TecnicoDTO objDTO) {
 
@@ -62,7 +70,8 @@ public class TecnicoController {
 
     return ResponseEntity.ok(new TecnicoDTO(obj));
   }
-@PreAuthorize("hasAnyRole('ADMIN')")
+
+  @PreAuthorize("hasAnyRole('ADMIN')")
   @DeleteMapping(value = "/{id}")
   public ResponseEntity<TecnicoDTO> deletar(@PathVariable Long id) {
 

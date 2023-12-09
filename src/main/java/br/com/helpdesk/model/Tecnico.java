@@ -34,8 +34,8 @@ public Tecnico(){
   }
 
 
-  public Tecnico(Long id, String nome, String cpf, String email, String senha) {
-    super(id, nome, cpf, email, senha);
+  public Tecnico(Long id, String nome, String cpf, String email, String senha,String nomeImagem) {
+    super(id, nome, cpf, email, senha, nomeImagem);
       addPerfil(Perfil.CLIENTE);
   }
 
@@ -54,6 +54,7 @@ public Tecnico(){
     public Tecnico(TecnicoDTO obj) {
     super();
     this.id = obj.getId();
+    this.nomeImagem=obj.getNomeImagem();
     this.nome = obj.getNome();
     this.cpf = obj.getCpf();
     this.email = obj.getEmail();

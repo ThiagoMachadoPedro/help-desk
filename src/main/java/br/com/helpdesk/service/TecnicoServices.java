@@ -20,6 +20,9 @@ import br.com.helpdesk.repository.TecnicoRepository;
 @Service
 public class TecnicoServices {
 
+
+  
+
   @Autowired
   private TecnicoRepository tecnicorepository;
 

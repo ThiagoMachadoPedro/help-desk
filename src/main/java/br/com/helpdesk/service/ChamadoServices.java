@@ -39,6 +39,7 @@ public class ChamadoServices {
 
 	public List<Chamado> findAll() {
 
+
 		return repository.findAll();
 	}
 
@@ -52,12 +53,15 @@ public class ChamadoServices {
 		Tecnico tecnico = tecnicoServices.findById(obj.getTecnico());
 		Cliente cliente = clienteServices.findById(obj.getCliente());
 
-		/* define se o id do chamado não é nulo se for nulo quer cadastrar se vinher o id quer atualizar */
+		/*
+		 * define se o id do chamado não é nulo se for nulo quer cadastrar se vinher o
+		 * id quer atualizar
+		 */
 		Chamado chamado = new Chamado();
 		if (obj.getId() != null) {
 			chamado.setId(obj.getId());
 		}
-/* se for igual a dois  ele pegara a  data do encerramento do chamado*/
+		/* se for igual a dois ele pegara a data do encerramento do chamado */
 		if (obj.getStatus().equals(2)) {
 			chamado.setDataFechamento(LocalDate.now());
 		}
@@ -77,5 +81,7 @@ public class ChamadoServices {
 		obj = newChamado(objDTO);
 		return repository.save(obj);
 	}
+
+
 
 }

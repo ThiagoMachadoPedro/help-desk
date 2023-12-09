@@ -27,7 +27,7 @@ public class ChamadoDTO implements Serializable {
   private Integer prioridade;
   @NotNull(message = "O campo Tecnico é requirido")
   private Long tecnico;
- @NotNull(message = "O campo Cliente é requirido")
+  @NotNull(message = "O campo Cliente é requirido")
   private Long cliente;
 
   private String nomeTecnico;
@@ -138,7 +138,5 @@ public class ChamadoDTO implements Serializable {
   public void setNomeCliente(String nomeCliente) {
     this.nomeCliente = nomeCliente;
   }
-
-
 
 }
